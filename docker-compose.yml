@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    container_name: muze_nginx
+    image: muze_nginx
+    ports:
+#      - "8083:80"
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - muze_network
+
+  php:
+    build: ./php
+    container_name: muze_php
+    image: muze_php:7.0
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mysql
+    networks:
+      - muze_network
+
+  mysql:
+    build: ./mysql
+    container_name: muze_mysql
+    image: muze_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: muze_user
+      MYSQL_USER: muze_user
+      MYSQL_PASSWORD: admin
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql/muze_db.sql:/muze_db.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - muze_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: muze_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+#      PMA_USER: root
+#      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - muze_network
+
+volumes:
+  mysql_data:
+
+networks:
+  muze_network:
+    driver: bridge
