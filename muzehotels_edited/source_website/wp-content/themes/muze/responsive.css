@@ -1,0 +1,10 @@
+﻿
+@media(min-width: 350px) and (max-width: 420px){
+	.bannertop-slide .anchor-start {
+    	bottom: 15%;
+    	padding: 10px 10px;
+	}
+	.play-button{
+		top: 24%;
+	}
+}
