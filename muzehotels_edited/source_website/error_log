@@ -1,2 +1,0 @@
-[25-Feb-2017 12:10:32 UTC] PHP Warning:  mysql_get_server_info(): Access denied for user 'root'@'localhost' (using password: NO) in /home/datphanv/muze/wp-content/themes/muze/inc/ReduxFramework/ReduxCore/inc/tracking.php on line 365
-[25-Feb-2017 12:10:32 UTC] PHP Warning:  mysql_get_server_info(): A link to the server could not be established in /home/datphanv/muze/wp-content/themes/muze/inc/ReduxFramework/ReduxCore/inc/tracking.php on line 365
